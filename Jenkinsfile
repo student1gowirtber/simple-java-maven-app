@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    parameters {
+        string(
+            name: 'BRANCH_NAME',
+            defaultValue: 'main',
+            description: 'Branch Name'
+            )}
     stages {
         stage('Build') {
             steps {
@@ -8,9 +14,12 @@ pipeline {
         }
         stage('Wait') {
             steps {
-                timeout( time: 1, unit: 'MINUTES') { echo 'Build läuft ...'} 
+                script { 
+                def timeoutDuration = (BRANCH_NAME == 'main') ? 30 : 15
+                timeout(time: timeoutDuration, unit: 'MINUTES') { 
+                    echo 'Build läuft ...' + BRANCH_NAME + 'branch .... '} 
             }
-        }
+        } }
         stage('Test') { 
             steps {
                 sh 'mvn test' 
