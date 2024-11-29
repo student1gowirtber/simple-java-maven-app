@@ -5,10 +5,13 @@ pipeline {
             name: 'BRANCH_NAME',
             defaultValue: 'main',
             description: 'Branch Name'
-            )}
+            )
+        string(name: 'GREETING', defaultValue: 'Hallo', description: 'Grußformel')
+    }
     stages {
         stage('Build') {
             steps {
+                echo "${params.GREETING},World!"
                 sh 'mvn -B -DskipTests clean package'
             }
         }
