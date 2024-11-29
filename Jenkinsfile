@@ -15,6 +15,14 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
+        stage('Bedingung') {
+            steps {
+                script {
+                    if (env.BUILD_NUMBER == '12') {
+                        echo 'Das ist der 12 Build'}
+                    else { echo 'Das ist nicht der Build 12'}
+                }
+            }}
         stage('Wait') {
             steps {
                 script { 
