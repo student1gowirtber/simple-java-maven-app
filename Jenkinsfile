@@ -22,7 +22,14 @@ pipeline {
                         echo 'Das ist der 12 Build'}
                     else { echo 'Das ist nicht der Build 12'}
                 }
-            }}
+            }
+        }
+        stage('Docker') {
+            steps {
+                script {
+                    docker.built ('tomcat:${env.BUILD_NUMBER}').push()               }
+            }
+        }
         stage('Wait') {
             steps {
                 script { 
