@@ -27,7 +27,7 @@ pipeline {
         stage('Docker') {
             steps {
                 script {
-                    docker.build('tomcat:${env.BUILD_NUMBER}').push()               }
+                    docker.build('tomcat:${env.GREETING}').push()               }
             }
         }
         stage('Wait') {
