@@ -5,6 +5,8 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
+            steps {
+                timeout( time: 1, unit: 'MINUTES') { echo 'Build läuft ...'}
         }
         stage('Test') { 
             steps {
